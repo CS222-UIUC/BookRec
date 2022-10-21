@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<h1> User Login </h1>
-
-<div>
-    <from method="post">
-    <label for="username">Username </label>
-    <br>
-    <input type="text" name = "username"
+<h1>{% block title %} Login {% endblock %}</h1>
+<div class="form_area">
+    <form method="post">
+        <label for="username">Username</label>
+        <br>
+        <input type="text" name="username"
             placeholder="Username"
-            value="{{request.form['username']}}"></input>
-    </br>
+            value="{{ request.form['username'] }}"></input>
+        <br>
 
-    <label for="password">Password </label>
-    <br>
-    <input type="text" name = "password"
+        <label for="password">Password</label>
+        <br>
+        <input type="text" name="password"
             placeholder="Password"
-            value="{{request.form['password']}}"></input>
-    </br>
+            value="{{ request.form['password'] }}"></input>
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
-<div class="container">
-    <button type="button" class="Enter">Enter</button>
-    <span class="forgotpw">Forgot <a href="">password?</a></span>
-</div>
+<button type="Forgot Password">Forgot Password</button>
