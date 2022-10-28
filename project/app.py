@@ -39,7 +39,7 @@ def login():
 @app.route('/index')
 def index():
     return render_template("index.html")
-
+    
 @app.route('/correctpwd')
 def correctpwd():
     return "correct password"
