@@ -4,6 +4,8 @@
         <title>Books Comparer</title>
         <script src="script.js"></script>
         <link rel="stylesheet" href="../project/static/css/style.css">
+        <script src="	https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
         <div class="heading" id="heading"></div>
@@ -14,12 +16,10 @@
             </div>
             <div class="spacer"></div>
             <div class="uploadbtns" id="uploadbtns">
-                <form id="upload" onchange="readlistone()">
-                    <input id='listoneupload' type='file' accept=".csv" value="Upload"/>
-                    <!--<input id="uploadone" type="button" value="Upload">-->
-                    <input id="compare" type='submit' value = "Compare" />
-                    <!-- <button id="uploadtwo">Upload</button> -->
-                    <input id="listtwoupload" type="file" accept=".csv" value="Upload"/>
+                <form id="upload">
+                    <input id='listoneupload' name="file1" type='file' accept=".csv" value="Upload" onchange="readlistone()"/>
+                    <input id="compare" name="file2" type='submit' value = "Compare" />
+                    <input id="listtwoupload" type="file" accept=".csv" value="Upload" onchange="readlisttwo()"/>
                 </form>
             </div>
         </div>
