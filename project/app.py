@@ -36,8 +36,16 @@ def login():
             return redirect('/incorrectpwd')
     return render_template('login.html')
 
-@app.route('/index')
+@app.route('/index', methods=('GET', 'POST'))
 def index():
+    if request.method == 'POST':
+        upload_file = request.files['file1']
+        if upload_file.filename != '':
+            upload_file.save(upload_file.filename)
+        compare_file = request.files['file2']
+        if compare_file.filename != '':
+            compare_file.save(compare_file.filename)
+        return redirect(url_for('index'))
     return render_template("index.html")
     
 @app.route('/correctpwd')
