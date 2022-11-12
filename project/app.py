@@ -5,8 +5,11 @@ from flask import render_template, request, url_for, redirect, session
 import json
 import sqlalchemy
 import os
+import pandas as pd
 
 app = Flask(__name__)
+
+userid = ""
 
 db = sqlalchemy.create_engine(
             sqlalchemy.engine.url.URL(
@@ -31,20 +34,28 @@ def login():
         pwd = (json.loads(pwd_res[1:len(pwd_res)-1]))["password"] 
         print(pwd)
         if pwd == pwd_input:
-            return redirect('/correctpwd')
+            global userid
+            userid = username
+            return redirect('/index')
         else:
             return redirect('/incorrectpwd')
     return render_template('login.html')
 
-@app.route('/index', methods=('GET', 'POST'))
+
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         upload_file = request.files['file1']
+        df1, df2 = pd.DataFrame(), pd.DataFrame()
         if upload_file.filename != '':
-            upload_file.save(upload_file.filename)
+            upload_file.save(userid + "_" + upload_file.filename)
+            df1 = file_to_df(userid + "_" + upload_file.filename, userid)
+            print(df1)
         compare_file = request.files['file2']
-        if compare_file.filename != '':
-            compare_file.save(compare_file.filename)
+        if compare_file.filename != '' and upload_file.filename != '':
+            compare_file.save(userid + "_" + compare_file.filename)
+            df2 = file_to_df(userid + "_" + compare_file.filename, userid)
+            print(df2)
         return redirect(url_for('index'))
     return render_template("index.html")
 
@@ -58,3 +69,26 @@ def incorrectpwd():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+def file_to_df(filename, id):
+    df = pd.read_csv(
+        filename,
+        encoding="ISO-8859-1",
+        header=0,
+        usecols=["ISBN", "My Rating"],
+        dtype={"ISBN":"str", "My Rating": "float"}
+    )
+    df = df.dropna(subset=['ISBN'])
+    for i in range(len(df.index)):
+        s = len(df.at[i,'ISBN'])
+        df.at[i,'ISBN'] = df.at[i,'ISBN'][2:s-1]
+        if (df.at[i,"ISBN"] == ''):
+            df = df.drop(i)
+    for i in df.index:
+        if (df.at[i,"My Rating"] == 0.0):
+            df = df.drop(i)
+    df = df.rename(columns={"ISBN": "isbn", "My Rating": "rating"})
+    df["UserID"] = id
+    df = df[['UserID', "isbn", "rating"]]
+    return df
