@@ -29,22 +29,21 @@ body::before {
 /* header
 /*******************************************/
 .logo{ 
-	position:absolute; 
-	top:10px; 
-	left:40px; 
+  margin:auto;
+  width: 10%;
+  padding: 10px;
 } 
 
 .search-bar{
   width:100%;
-  max-width:500px;
+  max-width:250px;
   height:30px;
   background: rgba(0,139,139,0.6);
   display:flex;
-  position:fixed;
-  top:100px;
-  right:40px;
-  border-radius:60px;
-  padding: 10px 20px;
+  position:static;
+  margin: auto;
+  border-radius:50px;
+  padding: 10px;
 }
 ::placeholder{
   color:black;
@@ -60,7 +59,7 @@ body::before {
 }
 
 .search-bar button img{
-  width:20px;
+  width:30px;
   border:0px;
 }
 
@@ -75,9 +74,8 @@ header {
         width: 100%;
    }
    main {
-         padding-top: 200px;
-         padding-left: 40px;
-         padding-right: 40px;
+margin: auto;
+padding: 40px;
         }
    
    section {
