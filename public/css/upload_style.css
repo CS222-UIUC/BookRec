@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+  }
+
+.heading {
+    height:7rem;
+}
+
+.container {
+    width:100%;
+    /*background-color: #E58c8a;*/
+}
+
+.booklists {
+    display:flex;
+    flex-direction:row;
+    /*background-color:aqua;*/
+    padding-left:50px;
+    padding-right:50px;
+    justify-content:space-around;
+    height:25rem;
+}
+
+
+.booklistone {
+    width:20rem;
+    padding-right:10rem;
+    /*background-color:bisque;*/
+}
+
+.booklisttwo {
+    /*background-color:black;*/
+    width:20rem;
+    padding-left:10rem;
+}
+
+.spacer {
+    height:3rem;
+}
+
+.uploadbtns {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    padding-left:22rem;
+    padding-right:22rem;
+}
