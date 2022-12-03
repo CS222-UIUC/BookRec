@@ -10,6 +10,8 @@ import pandas as pd
 app = Flask(__name__)
 
 userid = ""
+user1booklist = []
+user2booklist = []
 
 db = sqlalchemy.create_engine(
             sqlalchemy.engine.url.URL(
@@ -50,11 +52,15 @@ def index():
         if upload_file.filename != '':
             upload_file.save(userid + "_" + upload_file.filename)
             df1 = file_to_df(userid + "_" + upload_file.filename, userid)
+            global user1booklist
+            user1booklist = getNameList(df1)
             print(df1)
         compare_file = request.files['file2']
         if compare_file.filename != '' and upload_file.filename != '':
             compare_file.save(userid + "_" + compare_file.filename)
             df2 = file_to_df(userid + "_" + compare_file.filename, userid)
+            global user2booklist
+            user2booklist = getNameList(df2)
             print(df2)
         return redirect(url_for('index'))
     return render_template("index.html")
@@ -92,3 +98,7 @@ def file_to_df(filename, id):
     df["UserID"] = id
     df = df[['UserID', "isbn", "rating"]]
     return df
+
+def getNameList(dataframe):
+    df = dataframe[dataframe["rating"] >= 4.0]
+    return df["isbn"].tolist()
