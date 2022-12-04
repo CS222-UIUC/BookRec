@@ -74,6 +74,11 @@
         signInWithPopup,
         signInWithRedirect,
       } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+      } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
 
       // TODO: Add SDKs for Firebase products that you want to use
       // https://firebase.google.com/docs/web/setup#available-libraries
@@ -115,6 +120,8 @@
             alert("Login Failed!");
           });
       });
+      const firebase = require("firebase");
+      require("firebase/firestore");
     </script>
   </body>
 </html>
