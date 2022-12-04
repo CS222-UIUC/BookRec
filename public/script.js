@@ -6,7 +6,7 @@ function readlistone() {
     "load",
     () => {
       // this will then display a text file
-      listone.innerText = reader.result;
+      listone.innerText = "File Uploaded!";
     },
     false
   );
@@ -21,7 +21,7 @@ function readlisttwo() {
   reader.addEventListener(
     "load",
     () => {
-      listtwo.innerText = reader.result;
+      listtwo.innerText = "File Uploaded!";
     },
     false
   );

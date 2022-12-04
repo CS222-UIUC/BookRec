@@ -8,11 +8,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
   <body>
-    <div class="heading" id="heading"></div>
+    <div class="heading" id="heading"><p>Upload your Goodreads files below, and we'll give you some recommendations!
+      <br>
+      <br>
+      Upload your friend's files too to see how you two compare!</p></div>
     <div class="container" id="container">
       <div class="booklists" id="booklists">
-        <p class="booklistone" id="booklistone">List One</p>
-        <div class="booklisttwo" id="booklisttwo">List Two</div>
+        <p class="booklistone" id="booklistone"></p>
+        <div class="booklisttwo" id="booklisttwo"></div>
       </div>
       <div class="spacer"></div>
       <div class="uploadbtns" id="uploadbtns">
@@ -26,9 +29,10 @@
             class="btn"
             onchange="readlistone()"
           />
-          <input id="compare" name="file2" type="submit" value="Compare" class="btn" />
+          <input id="compare" type="submit" value="Compare" class="btn" />
           <input
             id="listtwoupload"
+            name="file2"
             type="file"
             accept=".csv"
             value="Upload"
