@@ -62,7 +62,7 @@ def index():
             global user2booklist
             user2booklist = getNameList(df2)
             print(df2)
-        return redirect(url_for('index'))
+        return redirect(url_for('summary'))
     return render_template("index.html")
     
 @app.route('/correctpwd')
