@@ -13,6 +13,10 @@ userid = ""
 user1booklist = []
 user2booklist = []
 
+df_book = "" #Pandas dataframe 
+
+print(type(df_book)) #pandas.core.frame.Dataframe
+
 db = sqlalchemy.create_engine(
             sqlalchemy.engine.url.URL(
                 drivername="mysql+pymysql",
