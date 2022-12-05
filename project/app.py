@@ -12,6 +12,7 @@ app = Flask(__name__)
 userid = ""
 user1booklist = []
 user2booklist = []
+score = 5.5
 
 db = sqlalchemy.create_engine(
             sqlalchemy.engine.url.URL(
@@ -64,7 +65,11 @@ def index():
             print(df2)
         return redirect(url_for('summary'))
     return render_template("index.html")
-    
+
+@app.route('/summary', methods=['GET'])
+def summary():
+    return render_template("summary.html",recs=user1booklist, similarity = score)
+
 @app.route('/correctpwd')
 def correctpwd():
     return "correct password"

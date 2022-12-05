@@ -5,7 +5,7 @@
     <div class="container">
       <table>
         <caption>
-          Comparison Summary
+          Statement Summary
         </caption>
         <thead>
           <tr>
@@ -45,29 +45,11 @@
       <div class="userlist">
         <ul>
           {% for book in recs %}
-            <li>{{ book }}</a></li>
+            <li><a href="#">{{ book }}</a></li>
           {% endfor %}
         </ul>
       </div>
       <h1>{{similarity}}</h1>
     </div>
   </body>
-  <script type="module">
-    import firebase from "firebase/app";
-    import "firebase/firestore";
-    const firebaseConfig = {
-      apiKey: "AIzaSyAFaio6oLqhfsBG5etudPimq_tXb8Fj4Mo",
-      authDomain: "cs-222.firebaseapp.com",
-      projectId: "cs-222",
-      storageBucket: "cs-222.appspot.com",
-      messagingSenderId: "53375683213",
-      appId: "1:53375683213:web:4cd1586bb3078ed3c930c4",
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // Initialize Cloud Firestore and get a reference to the service
-    const db = firebase.firestore();
-  </script>
 </html>
