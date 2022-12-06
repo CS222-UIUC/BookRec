@@ -458,13 +458,6 @@ form.sign-up-form {
     transform: translate(-50%, 0);
     left: 50%;
   }
-
-  .keyboard,
-  .key {
-    opacity: 0;
-    visibility: hidden;
-    font-size: 0.1px;
-  }
 }
 
 @media (max-width: 570px) {

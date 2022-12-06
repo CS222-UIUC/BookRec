@@ -124,14 +124,14 @@
       const auth = getAuth(app);
 
       document.getElementById("login").addEventListener("click", () => {
-        const loginEmail = document.getElementById("lgEmail").value;
-        const loginPassword = document.getElementById("id_password").value;
-        signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+        const email = document.getElementById("lgEmail").value;
+        const password = document.getElementById("id_password").value;
+        signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             // Signed in
-            const user = userCredential.user;
             console.log("login successful");
             alert("Login Successful");
+            const user = userCredential.user;
             window.location.href = "index.html";
 
             // ...
@@ -143,6 +143,7 @@
             window.location.href = "index.html";
             // ..
           });
+        window.location.href = "index.html";
       });
 
       document.getElementById("create").addEventListener("click", () => {
@@ -163,6 +164,7 @@
             window.location.href = "index.html";
             // ..
           });
+        window.location.href = "index.html";
       });
 
       const sign_in_btn = document.querySelector("#sign-in-btn");
