@@ -3,6 +3,18 @@ body {
   height: 100%;
   width: 100%;
 }
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 100%;
+  background-color: #ccc;
+}
+div {
+  position: absolute;
+  z-index: 1;
+}
 .container {
   margin: auto;
   width: 50%;
