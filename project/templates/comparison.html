@@ -7,7 +7,7 @@
       <button id="generate" style="opacity: 0">Generate</button>
       <table>
         <caption>
-          Recommendations:
+          Comparison Summary
         </caption>
       </table>
       <div class="userlist">
@@ -17,6 +17,9 @@
           {% endfor %}
         </ul>
       </div>
+    </div>
+    <div class="sm">
+      <h1>Your similarity: {{similarity}}</h1>
     </div>
   </body>
   <script src="../static/js/summary.js"></script>

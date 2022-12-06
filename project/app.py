@@ -3,8 +3,7 @@ from django.shortcuts import render
 from flask import Flask
 from flask import render_template, request, url_for, redirect, session
 import pandas as pd
-import pandas as pd
-from scipy.spatial import distance
+#from scipy.spatial import distance
 import zipfile
 import os.path
 import os
@@ -23,9 +22,10 @@ common_groups_list =[]
 common_groups = ''
 score = 5.5
 
-df_book = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/cs-222.appspot.com/o/Group-1-Project-main%2Fbook-vec-group.csv?alt=media&token=fb615c53-e2ae-4d9c-903b-093159c8da18') 
+#df_book = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/cs-222.appspot.com/o/Group-1-Project-main%2Fbook-vec-group.csv?alt=media&token=fb615c53-e2ae-4d9c-903b-093159c8da18') 
+df_book = pd.read_csv('static/book-vec-group.csv')
 
-@app.route('/homepage', methods=['GET'])
+@app.route('/', methods=['GET'])
 def homepage():
     return render_template("homepage.html")
 
@@ -34,23 +34,26 @@ def index():
     if request.method == 'POST':
         upload_file = request.files['file1']
         df1, df2 = pd.DataFrame(), pd.DataFrame()
+        global recommend_list
+        global common_groups
+        common_groups = ''
         if upload_file.filename != '':
             upload_file.save(userid + "_" + upload_file.filename)
             df1 = file_to_df(userid + "_" + upload_file.filename, userid)
             global user1booklist
-            user1booklist = isbn_to_title(getNameList(df1))
+            user1booklist = getNameList(df1)
             print(df1)
         compare_file = request.files['file2']
         if compare_file.filename != '' and upload_file.filename != '':
             compare_file.save(userid + "_" + compare_file.filename)
             df2 = file_to_df(userid + "_" + compare_file.filename, userid)
             global user2booklist
-            user2booklist = isbn_to_title(getNameList(df2))
-            global common_groups_list, common_groups
+            user2booklist = getNameList(df2)
+            global common_groups_list
             common_groups_list, common_groups = compare_on_list(user1booklist, user2booklist)
             common_groups = str(common_groups)
+            recommend_list = common_groups_list
         else:
-            global recommend_list
             recommend_list = recommend_on_list(user1booklist)
         
         return redirect(url_for('summary'))
@@ -58,7 +61,10 @@ def index():
 
 @app.route('/summary', methods=['GET'])
 def summary():
-    return render_template("summary.html",recs=recommend_list, similarity = common_groups)
+    if common_groups == '':
+        return render_template("summary.html",recs=recommend_list)
+    else:
+        return render_template("comparison.html",recs=recommend_list, similarity = common_groups)
 
 if __name__ == "__main__":
     app.run(debug=True)
@@ -68,8 +74,8 @@ def file_to_df(filename, id):
         filename,
         encoding="ISO-8859-1",
         header=0,
-        usecols=["ISBN", "My Rating"],
-        dtype={"ISBN":"str", "My Rating": "float"}
+        usecols=["Title", "ISBN", "My Rating"],
+        dtype={"Title": "str", "ISBN":"str", "My Rating": "float"}
     )
     df = df.dropna(subset=['ISBN'])
     for i in range(len(df.index)):
@@ -80,14 +86,14 @@ def file_to_df(filename, id):
     for i in df.index:
         if (df.at[i,"My Rating"] == 0.0):
             df = df.drop(i)
-    df = df.rename(columns={"ISBN": "isbn", "My Rating": "rating"})
+    df = df.rename(columns={"Title": "title", "ISBN": "isbn", "My Rating": "rating"})
     df["UserID"] = id
-    df = df[['UserID', "isbn", "rating"]]
+    df = df[['UserID',"title", "isbn", "rating"]]
     return df
 
 def getNameList(dataframe):
     df = dataframe[dataframe["rating"] >= 4.0]
-    return df["isbn"].tolist()
+    return df["title"].tolist()
 
 #convert bert embedding in string a a list (vector)
 def strtoVecBERT(str):
@@ -201,11 +207,3 @@ def compare_on_list(book_list1, book_list2):
 
     return  common_groups_list, common_groups
 
-#Transform list of isbn to list of books
-def isbn_to_title(df_book, isbn_list):
-    book_list = []
-    for isbn in isbn_list:
-        row = df_book[df_book["ISBN"] == isbn]
-        book_title = row["Book-Title"].to_list()[0]
-        book_list.append(book_title)
-    return book_list
