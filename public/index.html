@@ -65,39 +65,5 @@
         </h3>
       </section>
     </main>
-
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
-      import {
-        getAuth,
-        GoogleAuthProvider,
-        signInWithPopup,
-        signInWithRedirect,
-      } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
-      import {
-        getFirestore,
-        collection,
-        getDocs,
-      } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
-
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
-
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyAFaio6oLqhfsBG5etudPimq_tXb8Fj4Mo",
-        authDomain: "cs-222.firebaseapp.com",
-        projectId: "cs-222",
-        storageBucket: "cs-222.appspot.com",
-        messagingSenderId: "53375683213",
-        appId: "1:53375683213:web:4cd1586bb3078ed3c930c4",
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider(app);
-    </script>
   </body>
 </html>
