@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+  }
+
+.heading {
+    font-size: x-large;
+    padding-top: 5rem;
+    display:flex;
+    justify-content:center;
+    height:7rem;
+}
+
+.container {
+    width:100%;
+    overflow:hidden;
+    /*background-color: #E58c8a;*/
+}
+
+.booklists {
+    display:flex;
+    flex-direction:row;
+    /*background-color:aqua;*/
+    padding-left:50px;
+    padding-right:50px;
+    justify-content:space-around;
+    height:5rem;
+    padding-top:5rem;
+    font-size:large;
+}
+
+
+.booklistone {
+    width:20rem;
+    padding-right:10rem;
+    /*background-color:bisque;*/
+}
+
+.booklisttwo {
+    /*background-color:black;*/
+    width:20rem;
+    padding-left:10rem;
+}
+
+.spacer {
+    height:11rem;
+}
+
+.uploadbtns {
+    overflow:hidden;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    /* padding-left:22rem;
+    padding-right:22rem; */
+}
+
+
+.btn {
+    font-size:large;
+
+}
+
+.btn2 {
+    font-size:large;
+    height:100%;
+    padding-left:10rem;
+}

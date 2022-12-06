@@ -14,38 +14,11 @@ user1booklist = []
 user2booklist = []
 score = 5.5
 
-df = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/cs-222.appspot.com/o/Group-1-Project-main%2Fbook-vec-group.csv?alt=media&token=fb615c53-e2ae-4d9c-903b-093159c8da18') 
+#df = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/cs-222.appspot.com/o/Group-1-Project-main%2Fbook-vec-group.csv?alt=media&token=fb615c53-e2ae-4d9c-903b-093159c8da18') 
 
-db = sqlalchemy.create_engine(
-            sqlalchemy.engine.url.URL(
-                drivername="mysql+pymysql",
-                username= "root",
-                password= "Will1419Root",
-                database= "CS222Data",
-                host= "127.0.0.1"
-            )
-        )
-
-@app.route("/login", methods=('GET', 'POST'))
-def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        pwd_input = request.form['password']
-        conn = db.connect()
-        pwd_query = 'SELECT * FROM CS222Data.userinfo WHERE Username="{}"'.format(username) 
-        db_res = conn.execute(pwd_query)
-        conn.close()
-        pwd_res = json.dumps([dict(e) for e in db_res.fetchall()]) 
-        pwd = (json.loads(pwd_res[1:len(pwd_res)-1]))["password"] 
-        print(pwd)
-        if pwd == pwd_input:
-            global userid
-            userid = username
-            return redirect('/index')
-        else:
-            return redirect('/incorrectpwd')
-    return render_template('login.html')
-
+@app.route('/homepage', methods=['GET'])
+def homepage():
+    return render_template("homepage.html")
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
