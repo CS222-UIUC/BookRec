@@ -99,7 +99,8 @@
   transition: 1s 0.7s ease-in-out;
 }
 
-form {
+.sign-in-form {
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,13 +112,18 @@ form {
   transition: 0.2s 0.7s ease-in-out;
 }
 
-form.sign-in-form {
-  z-index: 2;
-}
-
-form.sign-up-form {
+.sign-up-form {
   z-index: 1;
   opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 5rem;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  transition: 0.2s 0.7s ease-in-out;
 }
 
 /* MODAL */
