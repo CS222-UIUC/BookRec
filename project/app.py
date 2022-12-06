@@ -60,17 +60,8 @@ def index():
 def summary():
     return render_template("summary.html",recs=recommend_list, similarity = common_groups)
 
-@app.route('/correctpwd')
-def correctpwd():
-    return "correct password"
-
-@app.route('/incorrectpwd')
-def incorrectpwd():
-    return "incorrect password"
-
 if __name__ == "__main__":
     app.run(debug=True)
-
 
 def file_to_df(filename, id):
     df = pd.read_csv(
@@ -98,6 +89,7 @@ def getNameList(dataframe):
     df = dataframe[dataframe["rating"] >= 4.0]
     return df["isbn"].tolist()
 
+#convert bert embedding in string a a list (vector)
 def strtoVecBERT(str):
     str = str[1:len(str) - 1]
     list_str = list(str.split(","))
@@ -106,6 +98,7 @@ def strtoVecBERT(str):
         list_float.append(float(element))
     return list_float
 
+#convert word2vec embedding in string to a list (vector)
 def strtoVecword2vec(str):
     str = str[1:len(str) - 1]
     list_str = list(str.split(" "))
@@ -115,11 +108,13 @@ def strtoVecword2vec(str):
             list_float.append(float(element))
     return list_float
 
+#Calculate cosine_distance of two vectors
 def cosine_distance(vec1, vec2):
     cos_distance = 1 - dot(vec1, vec2) / (norm(vec1) * norm(vec2))
     return cos_distance
 
-def recommend_n_on_ensemble(book_title, n):
+#compute ranking of word2vec embeddings
+def compute_word2vec_rank(book_title, n):
     word2vec_list = []
     vec1 = strtoVecword2vec(df_book[df_book["Book-Title"] == book_title]["word2vec"].tolist()[0])
     for index, row in df_book.iterrows():
@@ -131,7 +126,10 @@ def recommend_n_on_ensemble(book_title, n):
     word2vec_sorted = sorted(word2vec_list, key=lambda tup: tup[1])[0:len(word2vec_list)]
     word2vec_dist = [x[1] for x in word2vec_sorted]
     word2vec_rank = rankdata(word2vec_dist)
+    return word2vec_rank, word2vec_sorted
 
+#compute ranking of bert embeddings
+def compute_bert_rank(book_title, n):
     bert_list = []
     vec1 = strtoVecBERT(df_book[df_book["Book-Title"] == book_title]["BERT"].tolist()[0])
     for index, row in df_book.iterrows():
@@ -144,7 +142,14 @@ def recommend_n_on_ensemble(book_title, n):
     bert_dist = [x[1] for x in bert_sorted]
     bert_name = [x[0] for x in bert_sorted]
     bert_rank = rankdata(bert_dist)
+    return bert_rank, bert_sorted
 
+#combine two models of embeddings using rank ensemble
+def recommend_n_on_ensemble(book_title, n):
+    word2vec_rank, word2vec_sorted = compute_word2vec_rank(book_title, n)
+    bert_rank, bert_sorted = compute_bert_rank(book_title, n)
+    bert_name = [x[0] for x in bert_sorted]
+    
     scores = []
     for i in range(len(word2vec_rank)):
        score = 1/ (i + 1)  #rank of word2vec; add 1 to avoid division by 0
@@ -157,6 +162,7 @@ def recommend_n_on_ensemble(book_title, n):
     book_list = [x[0] for x in scores_sorted]
     return book_list
 
+#recommend n books base on a list of book titles
 def recommend_on_list(book_list, n=10):
     recommend_list = []
     #print(book_list)
@@ -167,6 +173,7 @@ def recommend_on_list(book_list, n=10):
                 recommend_list.append(recommend_book)
     return recommend_list[:n]
 
+#compare book title list given by two users, return books in common groups
 def compare_on_list(book_list1, book_list2):
     group_list1 = []
     group_list2 = []
@@ -194,6 +201,7 @@ def compare_on_list(book_list1, book_list2):
 
     return  common_groups_list, common_groups
 
+#Transform list of isbn to list of books
 def isbn_to_title(df_book, isbn_list):
     book_list = []
     for isbn in isbn_list:
