@@ -1,55 +1,26 @@
 <html>
   <body>
-    <link rel="stylesheet" href="css/summary.css" />
+    <canvas id="c"></canvas>
+    <link rel="stylesheet" href="../static/css/summary.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <div class="container">
+      <button id="generate" style="opacity: 0">Generate</button>
       <table>
         <caption>
-          Statement Summary
+          Comparison Summary
         </caption>
-        <thead>
-          <tr>
-            <th scope="col">Account</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Period</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Account">Visa - 3412</td>
-            <td data-label="Due Date">04/01/2016</td>
-            <td data-label="Amount">$1,190</td>
-            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Account">Visa - 6076</td>
-            <td data-label="Due Date">03/01/2016</td>
-            <td data-label="Amount">$2,443</td>
-            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Account">Corporate AMEX</td>
-            <td data-label="Due Date">03/01/2016</td>
-            <td data-label="Amount">$1,181</td>
-            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Acount">Visa - 3412</td>
-            <td data-label="Due Date">02/01/2016</td>
-            <td data-label="Amount">$842</td>
-            <td data-label="Period">01/01/2016 - 01/31/2016</td>
-          </tr>
-        </tbody>
       </table>
       <div class="userlist">
         <ul>
           {% for book in recs %}
-            <li><a href="#">{{ book }}</a></li>
+          <li><a>{{ book }}</a></li>
           {% endfor %}
         </ul>
       </div>
-      <h1>{{similarity}}</h1>
+    </div>
+    <div class="sm">
+      <h1>Your similarity: {{similarity}}</h1>
     </div>
   </body>
+  <script src="../static/js/summary.js"></script>
 </html>

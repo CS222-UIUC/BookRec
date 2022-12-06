@@ -1,0 +1,67 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -99999;
+  display: block;
+}
+div {
+  z-index: 1;
+  color: aqua;
+}
+.container {
+  height: 85%;
+  width: 100%;
+  position: relative;
+}
+
+.userlist {
+  width: 100%;
+  overflow: auto;
+  color: aqua;
+  font-size: 1.5em;
+  text-align: left;
+}
+
+.sm {
+  width: 100%;
+  overflow: auto;
+  color: aqua;
+  font-size: 1.5em;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+}
+
+table {
+  margin: auto;
+  color: aqua;
+  font-size: 3em;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: 0 0 0.75em;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+}
+
+/* general styling */
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
