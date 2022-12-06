@@ -5,7 +5,7 @@ document.getElementById("login").addEventListener("click", () => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      window.alert("Login Successful");
+      alert("Login Successful");
       window.location.href = "index.html";
 
       // ...
@@ -13,19 +13,19 @@ document.getElementById("login").addEventListener("click", () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      window.alert("Error : " + errorMessage);
+      alert("Error : " + errorMessage);
       // ..
     });
 });
 
-document.getElementById("login").addEventListener("click", () => {
+document.getElementById("create").addEventListener("click", () => {
   const creatEmail = document.getElementById("email_reg").value;
   const createPassword = document.getElementById("id_reg").value;
   createUserWithEmailAndPassword(auth, createEmail, createPassword)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      window.alert("Creation Successful");
+      alert("Account Creation Successful");
       window.location.href = "index.html";
     })
     .catch((error) => {
