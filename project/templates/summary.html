@@ -1,9 +1,10 @@
 <html>
   <body>
+    <canvas id="c"></canvas>
     <link rel="stylesheet" href="../static/css/summary.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <div class="container">
-      <button id="generate">Generate</button>
+      <button id="generate" style="opacity: 0">Generate</button>
       <table>
         <caption>
           Comparison Summary
@@ -16,7 +17,10 @@
           {% endfor %}
         </ul>
       </div>
-      <h1>{{similarity}}</h1>
+    </div>
+    <div class="sm">
+      <h1>Your similarity: {{similarity}}</h1>
     </div>
   </body>
-  </html>
+  <script src="../static/js/summary.js"></script>
+</html>
