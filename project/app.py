@@ -28,6 +28,9 @@ df_book = pd.read_csv('static/book-vec-group.csv')
 @app.route('/', methods=['GET'])
 def homepage():
     return render_template("homepage.html")
+@app.route('/homepage', methods=['GET'])
+def hp():
+    return render_template("homepage.html")
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
