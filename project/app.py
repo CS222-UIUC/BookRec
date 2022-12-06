@@ -14,6 +14,8 @@ user1booklist = []
 user2booklist = []
 score = 5.5
 
+df = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/cs-222.appspot.com/o/Group-1-Project-main%2Fbook-vec-group.csv?alt=media&token=fb615c53-e2ae-4d9c-903b-093159c8da18') 
+
 db = sqlalchemy.create_engine(
             sqlalchemy.engine.url.URL(
                 drivername="mysql+pymysql",

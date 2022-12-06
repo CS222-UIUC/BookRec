@@ -3,49 +3,16 @@
     <link rel="stylesheet" href="css/summary.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <div class="container">
+      <button id="generate">Generate</button>
       <table>
         <caption>
           Comparison Summary
         </caption>
-        <thead>
-          <tr>
-            <th scope="col">Account</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Period</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Account">Visa - 3412</td>
-            <td data-label="Due Date">04/01/2016</td>
-            <td data-label="Amount">$1,190</td>
-            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Account">Visa - 6076</td>
-            <td data-label="Due Date">03/01/2016</td>
-            <td data-label="Amount">$2,443</td>
-            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Account">Corporate AMEX</td>
-            <td data-label="Due Date">03/01/2016</td>
-            <td data-label="Amount">$1,181</td>
-            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="Acount">Visa - 3412</td>
-            <td data-label="Due Date">02/01/2016</td>
-            <td data-label="Amount">$842</td>
-            <td data-label="Period">01/01/2016 - 01/31/2016</td>
-          </tr>
-        </tbody>
       </table>
       <div class="userlist">
         <ul>
           {% for book in recs %}
-            <li>{{ book }}</a></li>
+          <li><a>{{ book }}</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -53,8 +20,12 @@
     </div>
   </body>
   <script type="module">
-    import firebase from "firebase/app";
-    import "firebase/firestore";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    import {
+      getStorage,
+      ref,
+      getDownloadURL,
+    } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
     const firebaseConfig = {
       apiKey: "AIzaSyAFaio6oLqhfsBG5etudPimq_tXb8Fj4Mo",
       authDomain: "cs-222.firebaseapp.com",
@@ -65,9 +36,50 @@
     };
 
     // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    // Initialize Cloud Firestore and get a reference to the service
-    const db = firebase.firestore();
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+    document.getElementById("generate").addEventListener("click", () => {
+      const gsRef = ref(
+        storage,
+        "gs://cs-222.appspot.com/Group-1-Project-main/book-vec-group.csv"
+      );
+      getDownloadURL(gsRef)
+        .then((url) => {
+          console.log(url);
+          // `url` is the download URL for 'images/stars.jpg'
+          const xhr = new XMLHttpRequest();
+          xhr.responseType = "blob";
+          xhr.onload = function (e) {
+            if (this.status == 200) {
+              // Note: .response instead of .responseText
+              var blob = this.response;
+              var reader = new FileReader();
+              reader.readAsDataURL(blob);
+              reader.onload = function (e) {
+                var img = document.createElement("img");
+                img.src = e.target.result;
+                document.body.appendChild(img);
+              };
+            }
+          };
+          xhr.open("GET", url, true);
+        })
+        .catch((error) => {
+          switch (error.code) {
+            case "storage/object-not-found":
+              // File doesn't exist
+              break;
+            case "storage/unauthorized":
+              // User doesn't have permission to access the object
+              break;
+            case "storage/canceled":
+              // User canceled the upload
+              break;
+            case "storage/unknown":
+              // Unknown error occurred, inspect the server response
+              break;
+          }
+        });
+    });
   </script>
 </html>
