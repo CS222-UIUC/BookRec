@@ -31,8 +31,8 @@ The backend was managed by Bwohan, who was in charge of all the python, as well 
 Yanzhen mainly worked on the algorithm, developing ways to find similarities between books and users. He worked on returning accurate results, as well as ensuring the results were different enough from the original books to ensure relevant results. 
 
 ## References:
-1.Devlin, J. et al. (no date) Bert: Pre-training of deep bidirectional Transformers for language understanding, ACL Anthology. Available at: https://aclanthology.org/N19-1423/ (Accessed: December 6, 2022). 
+1.Mikolov, T. et al. (2013) Efficient estimation of word representations in vector space, arXiv.org. Available at: https://arxiv.org/abs/1301.3781 (Accessed: December 6, 2022). 
 
-2.Mikolov, T. et al. (2013) Efficient estimation of word representations in vector space, arXiv.org. Available at: https://arxiv.org/abs/1301.3781 (Accessed: December 6, 2022). 
+2.Devlin, J. et al. (2018) Bert: Pre-training of deep bidirectional Transformers for language understanding, ACL Anthology. Available at: https://aclanthology.org/N19-1423/ (Accessed: December 6, 2022). 
 
-3.Shen, J. et al. (1970) Setexpan: Corpus-based set expansion via context feature selection and Rank Ensemble, SpringerLink. Springer International Publishing. Available at: https://link.springer.com/chapter/10.1007/978-3-319-71249-9_18 (Accessed: December 6, 2022). 
+3.Shen, J. et al. (2019) Setexpan: Corpus-based set expansion via context feature selection and Rank Ensemble, SpringerLink. Springer International Publishing. Available at: https://link.springer.com/chapter/10.1007/978-3-319-71249-9_18 (Accessed: December 6, 2022). 
