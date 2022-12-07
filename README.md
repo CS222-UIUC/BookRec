@@ -1,7 +1,6 @@
-# Group-1-Project 
 # NLP-Powered Book Recomemndation System
 ## Introduction
-Our project is called “NLP-powered book recommendation system”. It is a website that uses Machine Learning to automatically recommend books for the user and compute the similarity on reading habit between the user and his/her friend. We came up with this idea because we realized less and less people are reading books, either online or in paper copies. One of the leading issues is people lack access to information about books they would probably be interested in. That’s why we created a way of smart book recommendation process and add a function that tells user how his/her reading habit is closely related to his/her friends. 
+Our project is a website that uses Machine Learning to automatically recommend books for the user and compute the similarity on reading habit between the user and his/her friend. We came up with this idea because we realized less and less people are reading books, either online or in paper copies. One of the leading issues is people lack access to information about books they would probably be interested in. That’s why we created a way of smart book recommendation process and add a function that tells user how his/her reading habit is closely related to his/her friends. 
 
 ## Running the Project
 After downloading all the files, there are a couple more required steps to run it.
