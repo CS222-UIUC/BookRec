@@ -1,4 +1,6 @@
 # Group-1-Project
+## Introduction
+Our project is called “ML-powered book recommendation”. It is a website that uses Machine Learning to automatically recommend books for the user and compute the similarity on reading habit between the user and his/her friend. We came up with this idea because we realized less and less people are reading books, either online or in paper copies. One of the leading issues is people lack access to information about books they would probably be interested in. That’s why we created a way of smart book recommendation process and add a function that tells user how his/her reading habit is closely related to his/her friends. 
 
 ## Running the Project
 After downloading all the files, there are a couple more required steps to run it.
@@ -8,12 +10,22 @@ Then, you also have to download Flask, as well as scipy.stats. Then, you have to
 
 If you want to recommend book that is not in  ```book-vec-group.csv```, you can use ```EmbeddingBert.ipynb``` and ```EmbeddingWord2Vec.ipynb``` to generate the embeddings for your book base on its summary.
 
+## Technical Architecture
+First, the user will see a homepage, from which they can click the download icon to bring them to the upload page. From there, they can upload either one or two files and press compare. This will send a post request to the backend, which will then download the files into the directory, and process them into a list of the most highly rated books, which is then run through the algorithm to produce the necessary results. Depending on if one or two files were uploaded, the user will be brought to different summary pages: one with just a list of recommendations if they uploaded a single file, and one with a list of tuples of similar books between users, with a count of how many such pairs there were.
+
+
 ## Algorithm Explained
 Our recommendation model is base on calculate a book/paragraph embedding through mean-pooling all the words embeddings. We generate two word embeddings: the first is based on ```BERT(Bidirectional Encoder Representations from Transformers)```, and second is based on ```word2vec```. Using these embeddings, for every users' favorable books, we calculate the ranking of the all other books according to their cosine distance. We then use rank-ensemble mechanism to generate a single ranking, and the top ```n``` books are used to recommend to the users.
 
 When comparing the preference of two users, we apply ```t-SNE(t-distributed stochastic neighbor embeddin)```, and ```k-means``` on top of our BERT embeddings to divide all books into 50 groups. 
 We find the number of pairs of favorable books are in the same group, and we will output all such tuples. 
 
+## Work Distribution
+The frontend was mainly designed by David, who incorporated css and Javascript to the HTML pages to improve the visual aspect of the website, including an animated background for the summary. 
+
+The backend was managed by Bwohan, who was in charge of all the python, as well as the upload page because it communicated the most with the backend. He made sure that communication between the frontend and backend went smoothly and that information could be transferred. He also handled some preprocessing of the user's uploaded files, and put them in a convenient format for the algorithm.
+
+Yanzhen mainly worked on the algorithm, developing ways to find similarities between books and users. He worked on returning accurate results, as well as ensuring the results were different enough from the original books to ensure relevant results. 
 
 ## References:
 1.Devlin, J. et al. (no date) Bert: Pre-training of deep bidirectional Transformers for language understanding, ACL Anthology. Available at: https://aclanthology.org/N19-1423/ (Accessed: December 6, 2022). 
