@@ -13,6 +13,9 @@ If you want to recommend book that is not in  ```book-vec-group.csv```, you can 
 ## Technical Architecture
 First, the user will see a homepage, from which they can click the download icon to bring them to the upload page. From there, they can upload either one or two files and press compare. This will send a post request to the backend, which will then download the files into the directory, and process them into a list of the most highly rated books, which is then run through the algorithm to produce the necessary results. Depending on if one or two files were uploaded, the user will be brought to different summary pages: one with just a list of recommendations if they uploaded a single file, and one with a list of tuples of similar books between users, with a count of how many such pairs there were.
 
+![image](https://user-images.githubusercontent.com/59509756/206057505-0f8df06d-4560-48f6-a684-b83df8b02dbc.png)
+
+
 
 ## Algorithm Explained
 Our recommendation model is base on calculate a book/paragraph embedding through mean-pooling all the words embeddings. We generate two word embeddings: the first is based on ```BERT(Bidirectional Encoder Representations from Transformers)```, and second is based on ```word2vec```. Using these embeddings, for every users' favorable books, we calculate the ranking of the all other books according to their cosine distance. We then use rank-ensemble mechanism to generate a single ranking, and the top ```n``` books are used to recommend to the users.
