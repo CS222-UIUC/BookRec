@@ -28,7 +28,7 @@ The frontend was mainly designed by David, who incorporated css and Javascript t
 
 The backend was managed by Bwohan, who was in charge of all the python, as well as the upload page because it communicated the most with the backend. He made sure that communication between the frontend and backend went smoothly and that information could be transferred. He also handled some preprocessing of the user's uploaded files, and put them in a convenient format for the algorithm.
 
-Yanzhen mainly worked on the algorithm, developing ways to find similarities between books and users. He worked on returning accurate results, as well as ensuring the results were different enough from the original books to ensure relevant results. 
+Yanzhen mainly worked on the algorithm, developing ways to find similarities between books and users. He worked on returning accurate results, as well as ensuring the results were different enough from the original books to ensure relevancy. 
 
 ## References:
 1.Mikolov, T. et al. (2013) Efficient estimation of word representations in vector space, arXiv.org. Available at: https://arxiv.org/abs/1301.3781 (Accessed: December 6, 2022). 
