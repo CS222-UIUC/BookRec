@@ -18,10 +18,10 @@ First, the user will see a homepage, from which they can click the download icon
 
 
 ## Algorithm Explained
-Our recommendation model is base on calculate a book/paragraph embedding through mean-pooling all the words embeddings. We generate two word embeddings: the first is based on ```BERT(Bidirectional Encoder Representations from Transformers)```, and second is based on ```word2vec```. Using these embeddings, for every users' favorable books, we calculate the ranking of the all other books according to their cosine distance. We then use rank-ensemble mechanism to generate a single ranking, and the top ```n``` books are used to recommend to the users.
+Our recommendation model is base on calculating a book/paragraph embedding through mean-pooling all the words embeddings. We generate two word embeddings: the first is based on ```BERT(Bidirectional Encoder Representations from Transformers)```, and second is based on ```word2vec```. Using these embeddings, for every users' favorable books, we calculate the ranking of the all other books according to their cosine distance. We then use rank-ensemble mechanism to generate a single ranking, and the top ```n``` books are used to recommend to the users.
 
-When comparing the preference of two users, we apply ```t-SNE(t-distributed stochastic neighbor embeddin)```, and ```k-means``` on top of our BERT embeddings to divide all books into 50 groups. 
-We find the number of pairs of favorable books are in the same group, and we will output all such tuples. 
+When comparing the preference of two users, we apply ```t-SNE(t-distributed stochastic neighbor embeddin)```, and ```k-means``` on top of our ```BERT``` embeddings to divide all books into 50 groups. 
+We find the number of pairs of favorable books that are in the same group, and we will output all such tuples. 
 
 ## Work Distribution
 The frontend was mainly designed by David, who incorporated css and Javascript to the HTML pages to improve the visual aspect of the website, including an animated background for the summary. 
