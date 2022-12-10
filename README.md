@@ -1,6 +1,6 @@
 # NLP-Powered Book Recomemndation System
 ## Introduction
-Our project is a website that uses Machine Learning to automatically recommend books for the user and compute the similarity on reading habit between the user and his/her friend. We came up with this idea because we realized less and less people are reading books, either online or in paper copies. One of the leading issues is people lack access to information about books they would probably be interested in. That’s why we created a way of smart book recommendation process and add a function that tells user how his/her reading habit is closely related to his/her friends. 
+Our project is a website that uses NLP word embeddings to automatically recommend books for the user and compute the similarity on reading habit between the user and his/her friend. We came up with this idea because we realized less and less people are reading books, either online or in paper copies. One of the leading issues is people lack access to information about books they would probably be interested in. That’s why we created a way of smart book recommendation process and add a function that tells user how his/her reading habit is closely related to his/her friends. 
 
 ## Running the Project
 After downloading all the files, there are a couple more required steps to run it.
@@ -8,7 +8,7 @@ First, you have to unzip the ```book-vec-group.csv.zip``` file into its csv form
 
 Then, you also have to download Flask, as well as ```scipy.stats```. Then, you have to create a server from your computer. The way to do this is to first navigate to the ```project/``` directory, then typing ```export FLASK_APP=app.py``` in the terminal. Afterwards, typing ```flask run``` will give you a local host that you can copy and paste into your browser to view the website.
 
-If you want to recommend book that is not in  ```book-vec-group.csv```, you can use ```EmbeddingBert.ipynb``` and ```EmbeddingWord2Vec.ipynb``` to generate the embeddings for your book base on its summary.
+If you want to recommend book that is not in  ```book-vec-group.csv```, you can use ```Embedding.ipynb``` to generate the embeddings for your book base on its summary.
 
 ## Technical Architecture
 First, the user will see a homepage, from which they can click the download icon to bring them to the upload page. From there, they can upload either one or two files and press compare. This will send a post request to the backend, which will then download the files into the directory, and process them into a list of the most highly rated books, which is then run through the algorithm to produce the necessary results. Depending on if one or two files were uploaded, the user will be brought to different summary pages: one with just a list of recommendations if they uploaded a single file, and one with a list of tuples of similar books between users, with a count of how many such pairs there were.
